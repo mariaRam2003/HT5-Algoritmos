@@ -14,7 +14,7 @@ import time
 'Crear la variable de inicio'
 inicio = time.time()
 
-def Run(name,env,CPUrunning,CPUOfComputer): #Funcion que muestra cada programa que ingresa al CPU
+def Run(name, env, CPUrunning, CPUOfComputer): #Funcion que muestra cada programa que ingresa al CPU
     global TimeTotal
     
     yield env.timeout(CPUrunning) #vtiempo aleatorio previo a ingresar al CPU
@@ -23,19 +23,19 @@ def Run(name,env,CPUrunning,CPUOfComputer): #Funcion que muestra cada programa q
     
     #Simulacion del tiempo cada programa para llegar al CPU
     TimeProgram = random.randint(1, 10) #AQUI SE ELIGE EL PROGRAMA PARA EL INCISO (b)
-    print (name + ' llega a las ' + ending ' necesita ' + TimeProgram + ' instrucciones para salir del CPU.')
+    print ('%s llega a las %f necesita %d instrucciones para salir del CPU' % (name,ending,TimeProgram))
     
     with CPUOfComputer.request() as turn: #Agregar a la cola en caso la ejecucion este llena
         yield turn
         yield env.timeout(TimeProgram)
-        print ( name + ' sale del CPU a las ' + env.now )
+        print ('%s sale del CPU a las %f' % (name, env.now))
         
     tiempoTotal = env.now - ending
-    print (name + ' se tardo '  + tiempoTotal)
+    print ('%s se tardo %f' % (name, tiempoTotal))
     TimeTotal = TimeTotal + tiempoTotal
     
 env = simpy.Environment() #simulacion del programa
-CPUOfComputer = simpy.Resource(env,capacity = 3) 
+CPUOfComputer = simpy.Resource(env,capacity = 1)
 random.seed(10)
 
 TimeTotal = 0
