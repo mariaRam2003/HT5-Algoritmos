@@ -4,6 +4,7 @@ Hoja de Trabajo 5
 Algoritmos y Estructuras de Datos
 Moises Alonso
 Maria Marta Ramirez Gil 21342
+14/03/2022
 '''
 
 'Importar las clases necesarias'
@@ -14,6 +15,7 @@ import time
 'Crear la variable de inicio'
 inicio = time.time()
 
+'Creacion de la funcion'
 def Run(name, env, CPUrunning, CPUOfComputer): #Funcion que muestra cada programa que ingresa al CPU
     global TimeTotal
     
@@ -21,7 +23,7 @@ def Run(name, env, CPUrunning, CPUOfComputer): #Funcion que muestra cada program
     
     ending = env.now #Tiempo de llegada al CPU
     
-    #Simulacion del tiempo cada programa para llegar al CPU
+    'Simulacion del tiempo cada programa para llegar al CPU'
     TimeProgram = random.randint(1, 10) #AQUI SE ELIGE EL PROGRAMA PARA EL INCISO (b)
     print ('%s llega a las %f necesita %d instrucciones para salir del CPU' % (name,ending,TimeProgram))
     
@@ -34,8 +36,9 @@ def Run(name, env, CPUrunning, CPUOfComputer): #Funcion que muestra cada program
     print ('%s se tardo %f' % (name, tiempoTotal))
     TimeTotal = TimeTotal + tiempoTotal
     
-env = simpy.Environment() #simulacion del programa
-CPUOfComputer = simpy.Resource(env,capacity = 1)
+'simulacion del programa'
+env = simpy.Environment()
+CPUOfComputer = simpy.Resource(env,capacity = 2)
 random.seed(10)
 
 TimeTotal = 0
@@ -45,6 +48,6 @@ for i in range(25): #AQUI SE ESATBLECE LA CANTIDAD DE PROGRAMAS A CORRER
 
 env.run(until=500) #Tiempo que se necesita simular 
 
-#Tiempo de ejecucion
+'Tiempo de ejecucion'
 fin = time.time()
 print(fin-inicio)
